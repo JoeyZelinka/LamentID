@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
 const db = require('./models')
+const scan = require('./reddit_script/script')
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const store = new SequelizeStore({ db: db.sequelize})
@@ -34,5 +35,8 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/', indexRouter);
 app.use('/api/v1/users', usersRouter);
+
+// run script
+scan()
 
 module.exports = app;
