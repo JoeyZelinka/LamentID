@@ -44,4 +44,41 @@ router.post('/register', function(req, res, next) {
     })
 });
 
+// Login User
+router.post('/login', async (req, res) => {
+  //check if email/password
+  if (!req.body.password || !req.body.email) {
+    res.status(400).json({
+      error: 'Please include email and password.'
+    })
+    return
+  }
+  //look up user by email
+  const user = await db.User.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+  if (!user) {
+    res.status(400).json({
+      error: 'Could not find user with that email.'
+    })
+    return
+  }
+  //check password
+  const success = await bcrypt.compare(req.body.password, user.password)
+  if (!success) {
+    res.status(401).json({
+      error: 'Incorrect password.'
+    })
+    return
+  }
+  //log in
+  // req.session.user = user
+  //respond with success/error
+  res.json({
+    success: 'Logged in.'
+  })
+})
+
 module.exports = router;
