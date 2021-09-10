@@ -1,3 +1,5 @@
 node_modules
 .DS_Store
 .env
+/reddit_script/credentials
+/reddit_script/comment_data
