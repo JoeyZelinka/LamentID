@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 
 export default function Register() {
-    const [username, setEmail] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch('', {
+        fetch('/api/v1/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username,
+                email,
                 password
             })
         })
@@ -27,11 +28,11 @@ export default function Register() {
     }
     return (
         <div className='register'>
-            {error && ({ error })}
+            {error && (<div>{ error }</div>)}
             <div>
                 <form onSubmit={handleSubmit}>
                     <input
-                        value={username}
+                        value={email}
                         onChange={e => setEmail(e.target.value)}
                         type='text'
                         placeholder='Enter E-mail'
@@ -40,7 +41,7 @@ export default function Register() {
                     <input
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        type='text'
+                        type='password'
                         placeholder='Enter Password'
                     />
                     <button type='submit'>Register</button>

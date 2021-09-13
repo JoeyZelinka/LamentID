@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     /**
@@ -11,15 +9,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Comment.belongsToMany(models.Keyword,{ through:"KeywordComments" })
+      Comment.belongsToMany(models.Keyword, { through: "KeywordComments" });
     }
-  };
-  Comment.init({
-    data: DataTypes.JSONB,
-    sentiment: DataTypes.JSONB
-  }, {
-    sequelize,
-    modelName: 'Comment',
-  });
+  }
+  Comment.init(
+    {
+      data: DataTypes.JSONB,
+      sentiment: DataTypes.JSONB,
+      redditId: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
+    },
+    {
+      sequelize,
+      modelName: "Comment",
+    }
+  );
   return Comment;
 };

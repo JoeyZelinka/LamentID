@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const directoryPath = path.join(__dirname, "comment_data");
+    const directoryPath = path.join(__dirname, "seeder_data");
     const files = fs.readdirSync(directoryPath);
     // map to an array
     const comments = files.map((file) => {
@@ -15,6 +15,7 @@ module.exports = {
       return {
         data: JSON.stringify(comment.data),
         sentiment: JSON.stringify(comment.sentiment),
+        redditId: comment.data.id,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
