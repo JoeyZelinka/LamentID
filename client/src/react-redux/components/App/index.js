@@ -2,18 +2,13 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./index.css";
 import Register from "../Register";
 import { Container } from "react-bootstrap";
+import NavBar from "../NavBar"
 function App() {
   return (
     <Router>
       <Container>
         <div className="App">
-          <div className="text-center">
-            Static NavBar:
-            <br />
-            <Link to="/"> Home </Link>
-            <br />
-            <Link to="/register"> Register </Link>
-          </div>
+          <NavBar/>
           <Switch>
             <Route path="/register">
               <Register />

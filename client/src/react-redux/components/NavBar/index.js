@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { actionLoggedIn, actionLoggedOut } from '../redux/actions/user';
+
 
 function NavBar() {
   const { checked, user } = useSelector(state => state.user);
