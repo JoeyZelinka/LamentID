@@ -18,23 +18,21 @@ function NavBar() {
 
   return (
     <nav>
-      <Container>
-      <Navbar.Brand as={Link} to="/">Tweeta</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="ms-auto">
+
+      <Link as={Link} to="/">LamentID</Link>
+     
+        
           { checked && user ? (
             <>
-              <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
-              <Nav.Link href="/logout" onClick={handleLogout}>Logout</Nav.Link>
+              <Link as={Link} to="/about">About</Link>
+              <Link href="/logout" onClick={handleLogout}>Logout</Link>
             </>
           ) : (
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Link as={Link} to="/login">Login</Link>
           )}
-        </Nav>
-      </Navbar.Collapse>
-      </Container>
-    <nav/>
+        
+     
+    </nav>
   )
 }
 
