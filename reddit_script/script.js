@@ -155,7 +155,7 @@ async function scan() {
 
       // todo replace with db.create to postgress
       // uncomment below to generate seed data, then copy from ./comment_data to ./seeders/seeder_data
-      // fs.writeFile(`./comment_data/${comment.id}.json`, JSON.stringify(commentContainer), function (err) {
+      // fs.writeFile(__dirname + `/seeder_data/${comment.id}.json`, JSON.stringify(commentContainer), function (err) {
       //   if (err) {
       //     console.log(err);
       //   }

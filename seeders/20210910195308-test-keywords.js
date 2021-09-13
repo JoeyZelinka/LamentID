@@ -1,15 +1,23 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Keywords', [{
-      searchTerm: 'and',
-      subreddit: 'AskReddit',
-      ProjectId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-  ]);
+    return queryInterface.bulkInsert("Keywords", [
+      {
+        searchTerm: "you",
+        subreddit: "RoastMe",
+        ProjectId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        searchTerm: "you're",
+        subreddit: "RoastMe",
+        ProjectId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ]);
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -19,5 +27,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };
