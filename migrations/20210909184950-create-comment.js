@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      redditId: {
+        type: Sequelize.STRING,
+        unique: true,
+      },
       data: {
         type: Sequelize.JSONB,
       },
