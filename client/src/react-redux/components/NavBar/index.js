@@ -3,26 +3,27 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 
+
 function NavBar() {
   const { checked, user } = useSelector(state => state.user);
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // const handleLogout = (e) => {
-  //   e.preventDefault()
-  //   fetch('/api/v1/users/logout')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       dispatch(actionLoggedOut())
-  //     })
-  // }
-  // const handleLogin = (e) => {
-  //   e.preventDefault()
-  //   fetch('/api/v1/users/login')
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       dispatch(actionLoggedIn())
-  //     })
-  // }
+  const handleLogout = (e) => {
+    e.preventDefault()
+    fetch('/api/v1/users/logout')
+      .then(res => res.json())
+      .then(data => {
+        dispatch(actionLoggedOut())
+      })
+  }
+  const handleLogin = (e) => {
+    e.preventDefault()
+    fetch('/api/v1/users/login')
+      .then(res => res.json())
+      .then(data => {
+        dispatch(actionLoggedIn())
+      })
+  }
 
   return (
     <nav>
