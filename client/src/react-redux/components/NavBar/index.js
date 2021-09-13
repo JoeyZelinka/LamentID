@@ -51,10 +51,3 @@ function NavBar() {
 }
 
 export default NavBar
-
-
-
-/* <img src=''></img>
-<button type='submit' className='about'>About</button>
-<button type='submit' className='newProject'>Start New Project</button>
-<button type='submit' className='accountPref'>Account Preferences</button> */
