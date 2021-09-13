@@ -3,7 +3,12 @@ const { CommentStream } = require("snoostorm");
 // snoowrap
 const Snoowrap = require("snoowrap");
 // snoowrap credentials
-const creds = require("./credentials/reddit-credentials.json");
+const creds = {
+  "userAgent": process.env.REDDIT_USER_AGENT,
+  "clientId": process.env.REDDIT_CLIENT_ID,
+  "clientSecret": process.env.REDDIT_CLIENT_SECRET,
+  "refreshToken": process.env.REDDIT_REFRESH_TOKEN
+}
 // sentiment analysis
 const Sentiment = require("sentiment");
 // fs for saving seeder data
@@ -76,59 +81,81 @@ const wordsToScan = [
   "superduty",
   "mustang",
 ];
-// const wordsToScan = ["the", "and"];
-
-// Options object is a Snoowrap Listing object, but with subreddit and pollTime options
-const commentStream = new CommentStream(client, {
-  subreddit: "autos+cars+trucks+kia+nissan+honda+ford",
-  limit: 20,
-  pollTime: 2000,
-});
 
 // track number of comments scanned
 let numberOfCommentsScanned = 0;
 
-function scan() {
+// get keywords
+async function getKeywords() {
+  // build keyword storage
+  // get keywords from db
+  const keywords = await db.Keyword.findAll();
+  // do something with each keyword
+  // keywords.forEach((keyword) => {
+  //   const data = keyword.dataValues
+  //   const thing = {};
+  //   const subreddit = data.subreddit;
+  //   if (!thing[`${subreddit}`]) {
+  //     newSubreddit = thing[`${subreddit}`];
+  //     newSubreddit.keywords = [];
+  //     newSubreddit.keywords.push(keyword.searchTerm);
+  //   }
+  //   console.log(data);
+  // });
+  return keywords;
+}
+
+async function getSubreddits() {
+  const subreddits = await db.Keyword.findAll({
+    group: "subreddit",
+    attributes: ["subreddit"],
+  });
+  return subreddits.map((x) => x.subreddit);
+}
+
+async function scan() {
+  console.log("starting scan")
+  // get all keywords to scan
+  // Options object is a Snoowrap Listing object, but with subreddit and pollTime options
+  const keywords = await getKeywords();
+  const subreddits = await getSubreddits();
+  // console.log(subreddits)
+  const commentStream = new CommentStream(client, {
+    subreddit: subreddits.join("+"),
+    limit: 200,
+    pollTime: 2000,
+  });
+  // get keywords
+  // console.log(keywords);
   // call the loop
+
   commentStream.on("item", (comment) => {
+    // console.log('new comment: ', comment.subreddit)
     numberOfCommentsScanned++;
 
     // scan comment for sentiment
     const sentimentResult = sentiment.analyze(comment.body);
-    sentimentResult.wordsFound = [];
+    keywordsFound = [];
 
     sentimentResult.tokens.forEach((word) => {
-      wordsToScan.forEach((wordToScan) => {
-        if (word == wordToScan) {
-          sentimentResult.wordsFound.push(word);
+      keywords.forEach((keyword) => {
+        if (
+          word == keyword.searchTerm &&
+          comment.subreddit.display_name == keyword.subreddit
+        ) {
+          keywordsFound.push(keyword);
         }
       });
     });
 
-    if (sentimentResult.wordsFound.length) {
+    if (keywordsFound.length) {
       const commentContainer = {};
       commentContainer.data = comment;
       commentContainer.sentiment = sentimentResult;
-      // add comment properties to result
-      // sentimentResult.id = comment.id;
-      // sentimentResult.body = comment.body;
-      // sentimentResult.subreddit_id = comment.subreddit_id;
-      // sentimentResult.subreddit_name = comment.subreddit.display_name;
-      // sentimentResult.author_id = comment.author_id;
-      // sentimentResult.author_name = comment.author.name;
-      // sentimentResult.author_fullname = comment.author_fullname;
-      // sentimentResult.link_id = comment.link_id;
-      // sentimentResult.created_utc = comment.created_utc;
-      // sentimentResult.link_title = comment.link_title;
-      // sentimentResult.link_url = comment.link_url;
-      // sentimentResult.link_id = comment.link_id;
-      // sentimentResult.parent_id = comment.parent_id;
 
       // todo replace with db.create to postgress
-      // comments.push(sentimentResult);
-      // comments.push(commentContainer);
-      // console.log(commentContainer);
-      // fs.writeFile(`./comment_data/${comment.id}.json`, JSON.stringify(commentContainer), function (err) {
+      // uncomment below to generate seed data, then copy from ./comment_data to ./seeders/seeder_data
+      // fs.writeFile(__dirname + `/seeder_data/${comment.id}.json`, JSON.stringify(commentContainer), function (err) {
       //   if (err) {
       //     console.log(err);
       //   }
@@ -137,13 +164,17 @@ function scan() {
       db.Comment.create({
         data: JSON.stringify(commentContainer.data),
         sentiment: JSON.stringify(commentContainer.sentiment),
-      }).then((comment) => {
-        console.log('comment log: ', commentContainer.data.id);
-      });
+        redditId: comment.id,
+      })
+        .then((comment) => {
+          console.log("comment id: ", commentContainer.data.id);
+          // console.log(keywords[0]);
+          comment.addKeywords(keywordsFound);
+        })
+        .catch((err) => {
+          console.error("error failed to add comment to db: ", comment.id);
+        });
     }
-
-    // console.log("number of comments scanned: ", numberOfCommentsScanned);
-    // console.log("number of comments saved: ", comments.length);
   });
 }
 
