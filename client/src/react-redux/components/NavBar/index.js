@@ -4,6 +4,7 @@ import Register from '../Register/index'
 import Login from '../Login/index'
 import About from '../About/index'
 import NewProjects from '../NewProjects/NewProject'
+import Dashboard from '../Dashboard'
 function NavBar() {
   
   
@@ -26,6 +27,7 @@ function NavBar() {
             <br />
             <Link to="/newprojects"> Start New Project </Link>
             <br />
+            <Link to="/dashboard"> Dashboard </Link>
           </div>
           <Switch>
             <Route path="/register">
@@ -39,6 +41,9 @@ function NavBar() {
             </Route>
             <Route path="/newprojects">
               <NewProjects />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
             </Route>
           </Switch>
         </div>
