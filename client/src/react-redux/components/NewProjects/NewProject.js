@@ -11,7 +11,7 @@ export default function NewProject() {
     }]);
     const history = useHistory();
 
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch("/api/v1/projects/new", {
@@ -24,20 +24,28 @@ export default function NewProject() {
                 keywords: keywords
             })
         })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.error) {
-                    setError(data.error)
-                } else { 
-                    history.push("/dashboard")
-                }
-            })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) {
+                setError(data.error)
+            } else { 
+                history.push("/dashboard")
+            }
+        })
     }
-
+    
     const updateKeyword = (index, key, value) => {
         const newKeywords = [...keywords];
         newKeywords[index][key] = value;
         setKeywords(newKeywords)
+    }
+    
+    //? add button to add rows and add new object to state
+    const addNewKeywords = () => {
+        setKeywords([...keywords, {
+            searchTerm: "",
+            subreddit: ""
+        }])
     }
 
     return (
@@ -74,6 +82,7 @@ export default function NewProject() {
                         </div>
                     )
                 })}
+                <button onClick={addNewKeywords}>+</button>
                 {/* <br/>
                 <p>Suggested Keywords/SubReddits</p>
                 <textarea  name="suggest" cols="20" rows="4"></textarea> */}
