@@ -1,15 +1,14 @@
-import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-
 import NavBar from '../NavBar/index'
-// components
+import Graph from '../Graph'
 
 
 function App() {
   return (
-    <Router>
+    <div>
       <NavBar/>
-    </Router>
+      <Graph/>
+      </div>
   );
 }
 

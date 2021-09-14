@@ -14,7 +14,7 @@ function NavBar() {
       
         <div className="App">
           <div className="text-center">
-            Static NavBar:
+            
             <br />
             <Link to="/"> Home </Link>
             <br />
