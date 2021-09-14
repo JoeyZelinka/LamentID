@@ -3,7 +3,8 @@ import { Line } from "react-chartjs-2"
 
 
 
-const Graph = () => {
+const Graph = (props) => {
+    const { data } = props;
     return (
         <div>
             <Line
