@@ -9,6 +9,7 @@ export default function Register() {
   const [error, setError] = useState("");
   const history = useHistory();
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/api/v1/users/register", {
@@ -21,12 +22,13 @@ export default function Register() {
         password,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          history.push("/");
+    .then((res) => res.json())
+    // todo log user in after registering
+    .then((data) => {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        history.push("/");
         }
       });
   };
@@ -43,7 +45,7 @@ export default function Register() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="text"
-                placeholder="Enter username"
+                placeholder="email@domain.com"
               />
             </Form.Group>
             <Form.Group className="mb-3">

@@ -1,5 +1,4 @@
-export const LOGGED_IN = 'LOGGED_IN'
-export const LOGGED_OUT = 'LOGGED_OUT'
+import { LOGGED_IN, LOGGED_OUT } from './types'
 
 export function actionLoggedIn(user) {
   return {

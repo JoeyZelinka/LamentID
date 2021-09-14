@@ -1,4 +1,4 @@
-import { LOGGED_IN, LOGGED_OUT } from "./actions";
+import { LOGGED_IN, LOGGED_OUT } from "./types";
 
 export function user(state = {
   checked: false,
