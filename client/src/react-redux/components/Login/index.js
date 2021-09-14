@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionLoggedIn } from "../User/actions";
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/v1/users/register", {
+    fetch("/api/v1/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,13 +24,13 @@ export default function Register() {
         password,
       }),
     })
-    .then((res) => res.json())
-    // todo log user in after registering
-    .then((data) => {
-      if (data.error) {
-        setError(data.error);
-      } else {
-        history.push("/");
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          dispatch(actionLoggedIn(data.user));
+          history.push("/");
         }
       });
   };
@@ -40,7 +42,7 @@ export default function Register() {
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -57,12 +59,12 @@ export default function Register() {
               />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Register
+              Login
             </Button>
           </Form>
         </Card.Body>
         <Card.Footer>
-          Already have an account? <Link to="/login">Login Here</Link>
+          Don't have an account? <Link to="/register">Register Here</Link>
         </Card.Footer>
       </Card>
     </Container>

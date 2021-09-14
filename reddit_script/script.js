@@ -18,90 +18,10 @@ const db = require("../models");
 var sentiment = new Sentiment();
 const client = new Snoowrap(creds);
 
-// keep track of comments
-const comments = [];
-
-// hard-coded words to scan
-const wordsToScan = [
-  "kia",
-  "nissan",
-  "honda",
-  "ford",
-  "soul",
-  "seltos",
-  "sportage",
-  "niro",
-  "sorento",
-  "telluride",
-  "carnival",
-  "versa",
-  "senta",
-  "altima",
-  "maxima",
-  "leaf",
-  "gt-r",
-  "gtr",
-  "kicks",
-  "rogue sport",
-  "rogue",
-  "murano",
-  "pathfinder",
-  "armada",
-  "ariya",
-  "frontier",
-  "titan",
-  "hr-v",
-  "hrv",
-  "cr-v",
-  "crv",
-  "passport",
-  "pilot",
-  "civic",
-  "accord",
-  "insight",
-  "clarity",
-  "type-r",
-  "typer",
-  "odyssey",
-  "ridgeline",
-  "prologue",
-  "ecosport",
-  "escape",
-  "bronco",
-  "edge",
-  "explorer",
-  "mach-e",
-  "mache",
-  "expediton",
-  "maverick",
-  "ranger",
-  "Transit",
-  "f-150",
-  "f150",
-  "superduty",
-  "mustang",
-];
-
-// track number of comments scanned
-let numberOfCommentsScanned = 0;
-
 // get keywords
 async function getKeywords() {
-  // build keyword storage
   // get keywords from db
   const keywords = await db.Keyword.findAll();
-  // do something with each keyword
-  // keywords.forEach((keyword) => {
-  //   const data = keyword.dataValues
-  //   const thing = {};
-  //   const subreddit = data.subreddit;
-  //   if (!thing[`${subreddit}`]) {
-  //     newSubreddit = thing[`${subreddit}`];
-  //     newSubreddit.keywords = [];
-  //     newSubreddit.keywords.push(keyword.searchTerm);
-  //   }
-  //   console.log(data);
-  // });
   return keywords;
 }
 
@@ -116,7 +36,6 @@ async function getSubreddits() {
 async function scan() {
   console.log("starting scan")
   // get all keywords to scan
-  // Options object is a Snoowrap Listing object, but with subreddit and pollTime options
   const keywords = await getKeywords();
   const subreddits = await getSubreddits();
   // console.log(subreddits)
@@ -125,14 +44,8 @@ async function scan() {
     limit: 200,
     pollTime: 2000,
   });
-  // get keywords
-  // console.log(keywords);
-  // call the loop
 
   commentStream.on("item", (comment) => {
-    // console.log('new comment: ', comment.subreddit)
-    numberOfCommentsScanned++;
-
     // scan comment for sentiment
     const sentimentResult = sentiment.analyze(comment.body);
     keywordsFound = [];
@@ -153,7 +66,6 @@ async function scan() {
       commentContainer.data = comment;
       commentContainer.sentiment = sentimentResult;
 
-      // todo replace with db.create to postgress
       // uncomment below to generate seed data, then copy from ./comment_data to ./seeders/seeder_data
       // fs.writeFile(__dirname + `/seeder_data/${comment.id}.json`, JSON.stringify(commentContainer), function (err) {
       //   if (err) {
