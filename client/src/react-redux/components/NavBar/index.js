@@ -1,50 +1,54 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-
-
-
+import { BrowserRouter as Router, Link, Route, Switch  } from 'react-router-dom'
+import Register from '../Register/index'
+import Login from '../Login/index'
+import About from '../About/index'
+import NewProjects from '../NewProjects/NewProject'
 function NavBar() {
-  const { checked, user } = useSelector(state => state.user);
-  const dispatch = useDispatch()
-
-  const handleLogout = (e) => {
-    e.preventDefault()
-    fetch('/api/v1/users/logout')
-      .then(res => res.json())
-      .then(data => {
-        dispatch(actionLoggedOut())
-      })
-  }
-  const handleLogin = (e) => {
-    e.preventDefault()
-    fetch('/api/v1/users/login')
-      .then(res => res.json())
-      .then(data => {
-        dispatch(actionLoggedIn())
-      })
-  }
+  
+  
 
   return (
     <nav>
+      <Router>
+      
+        <div className="App">
+          <div className="text-center">
+            Static NavBar:
+            <br />
+            <Link to="/"> Home </Link>
+            <br />
+            <Link to="/register"> Register </Link>
+            <br />
+            <Link to="/login"> Login </Link>
+            <br />
+            <Link to="/about"> About </Link>
+            <br />
+            <Link to="/newprojects"> Start New Project </Link>
+            <br />
+          </div>
+          <Switch>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/newprojects">
+              <NewProjects />
+            </Route>
+          </Switch>
+        </div>
+      
+    </Router>
 
-      <Link as={Link} to="/">LamentID</Link>
-      <Link as={Link} to="/about">About</Link>
-      <Link as={Link} to="/newproject">Start New Project</Link>
-      <Link as={Link} to="/accountprefs">Account Preferences</Link>
+      
      
         
-          { checked && user ? (
-            <>
-              <Link href="/logout" onClick={handleLogout}>Logout</Link>
-            </>
-          ) : (
-            <form>
-              <input type="text" name="username" placeholder="Username"/>
-              <input type="text" name="password" placeholder="Password"/>
-            <Link as={Link} to="/login" onClick={handleLogin}>Login</Link>
-            </form>
-          )}
+          
         
      
     </nav>
