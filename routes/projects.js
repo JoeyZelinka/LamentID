@@ -2,6 +2,7 @@ var express = require('express');
 const db = require('../models');
 var router = express.Router();
 
+
 // Create New Project
 router.post('/new', async (req, res) =>{
   // check for content
@@ -37,6 +38,19 @@ router.post('/new', async (req, res) =>{
 router.get('/', async (req, res) => {
   const user = await db.User.findByPk(req.session.user.id)
   //find one project
+  const projects = await db.Project.findAll({
+    where: {
+      UserId: user.id
+    }
+  })
+  //send back
+  res.send(projects)
+})
+
+//Get Projects
+router.get('/', async (req, res) => {
+  const user = await db.User.findByPk(req.session.user.id)
+  //find one project
   const project = await db.Project.findAll({
     where: {
       UserId: user.id
@@ -45,5 +59,41 @@ router.get('/', async (req, res) => {
   //send back
   res.send(project)
 })
+
+//Get Projects
+router.get("/:project_id", async (req, res) => {
+  // const user = await db.User.findByPk(req.session.user.id)
+  //find one project
+  const project = await db.Project.findByPk(req.params.project_id);
+  //send back
+  res.send(project);
+});
+
+router.get("/:project_id/keywords", async (req, res) => {
+  // const user = await db.User.findByPk(req.session.user.id)
+  //find one project
+  const keywords = await db.Keyword.findAll({
+    where: {
+      ProjectId: req.params.project_id,
+    },
+  });
+  //send back
+  res.send(keywords);
+});
+
+router.get("/:project_id/comments", async (req, res) => {
+  // const user = await db.User.findByPk(req.session.user.id)
+  //find one project
+  const keywords = await db.Keyword.findAll({
+    where: {
+      ProjectId: req.params.project_id,
+    },
+    include: [
+      db.Comment
+    ]
+  });
+  //send back
+  res.send(keywords)
+});
 
 module.exports = router;
