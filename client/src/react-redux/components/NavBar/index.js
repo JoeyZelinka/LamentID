@@ -5,30 +5,48 @@ import Login from '../Login/index'
 import About from '../About/index'
 import NewProjects from '../NewProjects/NewProject'
 import Dashboard from '../Dashboard'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { actionLoggedOut } from '../User/actions'
+
 function NavBar() {
-  
-  
+  const { checked, user } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    fetch('/api/v1/users/logout')
+      .then(res => res.json())
+      .then(data => {
+        dispatch(actionLoggedOut())
+      })
+  }
 
   return (
     <nav>
       <Router>
-      
+        <Navbar bg="light" expand="lg" className="mb-3">
+          <Container>
+            <img src="/lamentidv2crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="ms-auto">
+                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                { checked && user ? (
+                  <>
+                  <Nav.Link as={Link} to="/newprojects">Start New Project</Nav.Link>
+                  <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                  <Nav.Link href="/logout" onClick={handleLogout}>Logout</Nav.Link>
+                  </>
+                ) : (
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                ) }
+                </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <div className="App">
-          <div className="text-center">
-            
-            <br />
-            <Link to="/"> Home </Link>
-            <br />
-            <Link to="/register"> Register </Link>
-            <br />
-            <Link to="/login"> Login </Link>
-            <br />
-            <Link to="/about"> About </Link>
-            <br />
-            <Link to="/newprojects"> Start New Project </Link>
-            <br />
-            <Link to="/dashboard"> Dashboard </Link>
-          </div>
           <Switch>
             <Route path="/register">
               <Register />
@@ -47,15 +65,7 @@ function NavBar() {
             </Route>
           </Switch>
         </div>
-      
     </Router>
-
-      
-     
-        
-          
-        
-     
     </nav>
   )
 }

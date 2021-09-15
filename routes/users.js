@@ -75,14 +75,16 @@ router.post('/login', async (req, res) => {
   }
   //log in
   req.session.user = user
+  const { password, ...userData } = user.dataValues
   //respond with success/error
   res.json({
-    success: 'Logged in.'
+    success: 'Logged in.',
+    user: userData
   })
 })
 
 //Logout
-router.get('/', (req, res) => {
+router.get('/logout', (req, res) => {
   req.session.user = null;
   res.json({
     success: 'User logged out.'
