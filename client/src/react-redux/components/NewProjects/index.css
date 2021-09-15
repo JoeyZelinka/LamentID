@@ -1,7 +1,8 @@
-
+.newProjectForm {
+    display:flex
+}
 
 .buttons {
-    display: flex;
     margin-top: 10px;
     
 }
