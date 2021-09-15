@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-import { Button, Container, Form, Col } from 'react-bootstrap'
+import { Button, Container, Form, Row, Card } from 'react-bootstrap'
 import "./index.css"
 
 
@@ -51,9 +51,10 @@ export default function NewProject() {
     }
 
     return (
-        <Container fluid className="newProjectForm">
+        <Container className="newProjectForm">
             {error && (<div>{error}</div>)}
-            <Col>
+          <Card>
+              <Card.Body>
                 <Form>
                     <Form.Group
                         onSubmit={handleSubmit}
@@ -68,8 +69,8 @@ export default function NewProject() {
 
                         {keywords.map((keyword, index) => {
                             return (
-                                <Container key={index}>
 
+                                <Container key={index}>
                                     <Form.Label for="keywords">Keyword:</Form.Label>
                                     <Form.Control
                                         value={keyword.searchTerm}
@@ -85,6 +86,7 @@ export default function NewProject() {
                                         type="text"
                                         maxLength="100" />
                             </Container>
+                                       
                     )
                 })}
                     <Container className="buttons">
@@ -93,7 +95,8 @@ export default function NewProject() {
                     </Container>
                 </Form.Group>
             </Form>
-              </Col>  
+            </Card.Body>
+              </Card>
         </Container>
     )
 }
