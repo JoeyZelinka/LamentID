@@ -11,6 +11,9 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const store = new SequelizeStore({ db: db.sequelize})
 store.sync();
 
+// one
+const projectRouter = require('./routes/project');
+// many
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const projectsRouter = require('./routes/projects');
@@ -23,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: 'secret', //used to sign the cookie
+    secret: 'LamentIdSessionSecret', //used to sign the cookie
     resave: false, //update session even with no changes
     saveUninitialized: true, //always create a session
     cookie: {
@@ -35,6 +38,10 @@ app.use(
 )
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+
+// one
+app.use('/api/v1/project', projectRouter);
+// many
 app.use('/', indexRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/projects', projectsRouter);
