@@ -34,6 +34,7 @@ router.post('/new', async (req, res) =>{
     })
 });
 
+
 //Get Projects
 router.get('/', async (req, res) => {
   const user = await db.User.findByPk(req.session.user.id)
@@ -47,18 +48,7 @@ router.get('/', async (req, res) => {
   res.send(projects)
 })
 
-//Get Projects
-router.get('/', async (req, res) => {
-  const user = await db.User.findByPk(req.session.user.id)
-  //find one project
-  const project = await db.Project.findAll({
-    where: {
-      UserId: user.id
-    }
-  })
-  //send back
-  res.send(project)
-})
+
 
 //Get Projects
 router.get("/:project_id", async (req, res) => {
