@@ -13,8 +13,13 @@ const Graph = (props) => {
       });
   }, []);
   const datasets = rawData.map((keyword) => {
+    let random_rgba = () => {
+      var o = Math.round, r = Math.random, s = 255;
+      return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ', 0.9)';
+  }
     return {
       label: keyword.searchTerm,
+      borderColor: random_rgba(),
       data: keyword.Comments.map((comment) => {
         const commentData = JSON.parse(comment.data);
         const sentimentData = JSON.parse(comment.sentiment);
