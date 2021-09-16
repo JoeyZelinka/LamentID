@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-import { Button, Container, Form, Row, Card } from 'react-bootstrap'
+import { Button, Container, Form, Card } from 'react-bootstrap'
 import "./index.css"
 
 
@@ -54,12 +54,14 @@ export default function NewProject() {
     }
 
     return (
-        <Container className="newProjectForm">
+        <div className="newProjectForm">
             {error && (<div>{error}</div>)}
             <Card>
                 <Card.Body>
+ 
                     <Form onSubmit={handleSubmit}>
                         <Form.Group
+
                             className="newProject">
                             <Form.Label>Project Name:</Form.Label>
                             <Form.Control
@@ -68,6 +70,7 @@ export default function NewProject() {
                                 onChange={(e) => setProjectName(e.target.value)}
                                 type="text"
                                 maxLength="100" />
+
                             {keywords.map((keyword, index) => {
                                 return (
                                     <Container key={index}>
@@ -92,10 +95,13 @@ export default function NewProject() {
                                 <Button variant="warning" onClick={addNewKeywords}>+</Button>
                                 <Button variant="primary" type="submit">Save Project</Button>
                             </Container>
+
                         </Form.Group>
                     </Form>
                 </Card.Body>
             </Card>
+
         </Container>
+
     )
 }
