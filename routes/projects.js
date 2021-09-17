@@ -38,7 +38,7 @@ router.post('/new', async (req, res) =>{
 //Get Projects
 router.get('/', async (req, res) => {
   const user = await db.User.findByPk(req.session.user.id)
-  //find one project
+  //find all projects
   const projects = await db.Project.findAll({
     where: {
       UserId: user.id
@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
 
 
 
-//Get Projects
+//Get Project
 router.get("/:project_id", async (req, res) => {
   // const user = await db.User.findByPk(req.session.user.id)
   //find one project
