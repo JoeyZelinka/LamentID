@@ -20,6 +20,8 @@ const Graph = (props) => {
     return {
       label: keyword.searchTerm,
       borderColor: random_rgba(),
+      cubicInterpolationMode: 'monotone',
+      tension: 0.5,
       data: keyword.Comments.map((comment) => {
         const commentData = JSON.parse(comment.data);
         const sentimentData = JSON.parse(comment.sentiment);
