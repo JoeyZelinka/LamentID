@@ -8,6 +8,7 @@ import Dashboard from '../Dashboard'
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLoggedOut } from '../User/actions'
+import ProtectedRoute from '../ProtectedRoute/index';
 
 
 function NavBar() {
@@ -109,12 +110,12 @@ function NavBar() {
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/newprojects">
+            <ProtectedRoute path="/newprojects">
               <NewProjects />
-            </Route>
-            <Route path="/dashboard">
+            </ProtectedRoute>
+            <ProtectedRoute path="/dashboard">
               <Dashboard />
-            </Route>
+            </ProtectedRoute>
           </Switch>
         </div>
       </Router>

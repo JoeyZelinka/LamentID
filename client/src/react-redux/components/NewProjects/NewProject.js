@@ -71,7 +71,6 @@ export default function NewProject() {
                 type="text"
                 maxLength="100"
               />
-
               {keywords.map((keyword, index) => {
                 return (
                   <Container key={index}>
