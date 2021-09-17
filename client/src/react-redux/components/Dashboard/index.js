@@ -12,7 +12,6 @@ function Dashboard() {
   const handleShow = () => setShow(true);
   //modal variables end
   
-
   useEffect(() => {
     fetch('/api/v1/projects/')
       .then(res => res.json())
@@ -40,11 +39,10 @@ function Dashboard() {
               <Button variant="link" onClick={handleShow} key={project.id} data={project}>Add Another Keyword</Button>
               <Modal show={show} onHide={handleClose}>
                 <Modal.Title>Add Keywords</Modal.Title>
-                <Modal.Body><AddKeywords /></Modal.Body>
+                <Modal.Body><AddKeywords data={project}/></Modal.Body>
               </Modal>
             </Container>
-              <Graph data={comments} key={project.id} />
-            
+              <Graph data={project.id} key={project.id} />
           </Tab>
         )
       })}

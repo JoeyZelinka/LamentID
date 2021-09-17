@@ -73,18 +73,19 @@ router.get("/:project_id/keywords", async (req, res) => {
 
 
 router.post("/:project_id/keywords", async (req, res) => {
-  //find one project
-  const project = await db.Keyword.findAll({
-    where: {
-      ProjectId: req.params.project_id,
-    },
-  });
   // check for content
-  if (!req.body || !req.body.name || !req.body.keywords ) {
+  if (!req.body || !req.body.keywords ) {
     res.status(400).json({
       error: 'Please include all required fields.'
     })
     return
+  }
+  //create project where project id matches
+  const project = await db.Project.findByPk(req.params.project_id)
+  if (project.UserId !== req.session.user.id) {
+    res.status(400).json({
+      error: 'Can not edit projects that are not attributed to your account.'
+    })
   }
       //add searchTerm and subreddit
       if( req.body.keywords ) {
@@ -97,7 +98,7 @@ router.post("/:project_id/keywords", async (req, res) => {
       }
 
   //send back
-  res.send(keywords);
+  res.send(project);
 });
 
 router.get("/:project_id/comments", async (req, res) => {

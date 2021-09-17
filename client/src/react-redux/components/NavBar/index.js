@@ -42,7 +42,7 @@ function NavBar() {
       <Router>
         <Navbar bg="light" expand="lg" className="mb-3">
           <Container>
-            <img src="/lamentidv2crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" />
+            <img src="/lamentidv3crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" />
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
