@@ -24,7 +24,7 @@ function NavBar() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   //modal variables end
- 
+
 
 
 
@@ -57,44 +57,36 @@ function NavBar() {
                 ) : (
                   // <Nav.Link as={Link} to="/login">Login</Nav.Link>
                   <Container>
-                  
                     <Button variant="link" onClick={handleShow}>
                       Login
                     </Button>
-
                     <Modal show={show} onHide={handleClose}>
-                      
-                        <Modal.Title>Enter Login Info</Modal.Title>
-                     
-                      <Modal.Body><Login/></Modal.Body>
+                      <Modal.Title>Enter Login Info</Modal.Title>
+                      <Modal.Body><Login /></Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
-                        
                       </Modal.Footer>
-                    </Modal>               
-                                  
-                  <Button variant="link" onClick={handleShow2}>
-                    Register
+                    </Modal>
+                    <Button variant="link" onClick={handleShow2}>
+                      Register
                     </Button>
-                  <Modal show={show2} onHide={handleClose2}>
-                    
+                    <Modal show={show2} onHide={handleClose2}>
                       <Modal.Title>Enter Registration Info</Modal.Title>
-                   
-                    <Modal.Body><Register/></Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose2}>
-                        Close
-                      </Button>
-                      
-                    </Modal.Footer>
-                  </Modal>
-                  </Container>
-                  )}
-                  
+                      <Modal.Body><Register /></Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose2}>
+                          Close
+                        </Button>
 
-                
+                      </Modal.Footer>
+                    </Modal>
+                  </Container>
+                )}
+
+
+
               </Nav>
             </Navbar.Collapse>
           </Container>

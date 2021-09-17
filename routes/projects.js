@@ -71,6 +71,35 @@ router.get("/:project_id/keywords", async (req, res) => {
   res.send(keywords);
 });
 
+
+router.post("/:project_id/keywords", async (req, res) => {
+  //find one project
+  const project = await db.Keyword.findAll({
+    where: {
+      ProjectId: req.params.project_id,
+    },
+  });
+  // check for content
+  if (!req.body || !req.body.name || !req.body.keywords ) {
+    res.status(400).json({
+      error: 'Please include all required fields.'
+    })
+    return
+  }
+      //add searchTerm and subreddit
+      if( req.body.keywords ) {
+        req.body.keywords.forEach(async keyword => {
+          await project.createKeyword({
+            searchTerm: keyword.searchTerm,
+            subreddit: keyword.subreddit
+          })
+        });
+      }
+
+  //send back
+  res.send(keywords);
+});
+
 router.get("/:project_id/comments", async (req, res) => {
   // const user = await db.User.findByPk(req.session.user.id)
   //find one project
