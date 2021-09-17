@@ -5,6 +5,7 @@ import { enUS } from "date-fns/locale";
 
 const Graph = (props) => {
   const [rawData, setRawData] = useState([]);
+  console.log(props)
   useEffect(() => {
     fetch("/api/v1/projects/1/comments")
       .then((res) => res.json())
