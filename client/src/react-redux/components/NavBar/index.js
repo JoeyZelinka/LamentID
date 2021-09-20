@@ -2,16 +2,11 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import Register from '../Register/index'
 import Login from '../Login/index'
-import About from '../About/index'
-import NewProjects from '../NewProjects/NewProject'
-import Dashboard from '../Dashboard'
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLoggedOut } from '../User/actions'
 
-import HomePage from '../HomePage/index'
 
-import ProtectedRoute from '../ProtectedRoute/index';
 
 
 
@@ -42,8 +37,8 @@ function NavBar() {
   }
 
   return (
-    <nav>
-      <Router>
+    
+      
         <Navbar bg="light" expand="lg" className="mb-3">
           <Container>
             <a href="/"><img src="/lamentidv3crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" /></a>
@@ -95,30 +90,7 @@ function NavBar() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <div className="App">
-          <Switch>
-          <Route path="/homepage">
-              <HomePage />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <ProtectedRoute path="/newprojects">
-              <NewProjects />
-            </ProtectedRoute>
-            <ProtectedRoute path="/dashboard">
-              <Dashboard />
-            </ProtectedRoute>
-          </Switch>
-        </div>
-      </Router>
-    </nav>
+        
   )
 }
 
