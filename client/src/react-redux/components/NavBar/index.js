@@ -50,7 +50,7 @@ function NavBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
-                <Nav.Link as={Link} to="/homepage">Home</Nav.Link>
+                <Nav.Link as={Link} to="/homepage" className="mx-3">Home</Nav.Link>
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 {checked && user ? (
                   <>
@@ -61,7 +61,7 @@ function NavBar() {
                 ) : (
                   // <Nav.Link as={Link} to="/login">Login</Nav.Link>
                   <Container>
-                    <Button variant="link" onClick={handleShow}>
+                    <Button variant="link" onClick={handleShow} className="text-decoration-none text-secondary">
                       Login
                     </Button>
                     <Modal show={show} onHide={handleClose}>
@@ -73,7 +73,7 @@ function NavBar() {
                         </Button>
                       </Modal.Footer>
                     </Modal>
-                    <Button variant="link" onClick={handleShow2}>
+                    <Button variant="link" onClick={handleShow2} className="text-decoration-none text-secondary">
                       Register
                     </Button>
                     <Modal show={show2} onHide={handleClose2}>
