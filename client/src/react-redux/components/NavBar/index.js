@@ -45,7 +45,7 @@ function NavBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
-                <Nav.Link as={Link} to="/homepage" className="mx-3">Home</Nav.Link>
+                <Nav.Link as={Link} to="/" className="mx-3">Home</Nav.Link>
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 {checked && user ? (
                   <>
