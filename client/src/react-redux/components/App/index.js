@@ -1,12 +1,12 @@
 import "./index.css";
 import NavBar from '../NavBar/index'
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
-import HomePage from "../HomePage"
+import HomePage from "../HomePage/index"
 import Register from '../Register/index'
 import Login from '../Login/index'
 import About from '../About/index'
 import NewProjects from '../NewProjects/NewProject'
-import Dashboard from '../Dashboard'
+import Dashboard from '../Dashboard/index'
 import ProtectedRoute from "../ProtectedRoute/index"
 
 
@@ -22,7 +22,7 @@ function App() {
       <NavBar/>
       <div className="App">
           <Switch>
-          <Route path="/">
+          <Route exact path="/">
               <HomePage />
             </Route>
             <Route path="/register">
