@@ -1,7 +1,22 @@
 .trackyour {
-    font-family:'Courier New', Courier, monospace;
-    font-size: 40px;
+    font-family: cursive;
+    font-size: 50px;
     background-color: rgb(197, 193, 193);
     padding-bottom: 20px;
+    margin-top: 30px;
+    align-items: center;
 }
 
+.bpf {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    padding-top: 30px;
+
+}
+
+.software {
+    padding-top: 60px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    
+}
