@@ -56,13 +56,13 @@ export default function NewProject() {
     };
 
     return (
-        <div className="newProjectForm">
+        <Container className="newProjectForm">
             {error && <div>{error}</div>}
             <Card>
                 <Card.Body>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="newProject">
-                            <Form.Label>Project Name:</Form.Label>
+                            <Form.Label >Project Name:</Form.Label>
                             <Form.Control
                                 value={projectName}
                                 name="keywords"
@@ -73,7 +73,7 @@ export default function NewProject() {
                             {keywords.map((keyword, index) => {
                                 return (
                                     <Container key={index}>
-                                        <Form.Label for="keywords">Keyword:</Form.Label>
+                                        <Form.Label>Keyword:</Form.Label>
                                         <Form.Control
                                             value={keyword.searchTerm}
                                             onChange={(e) =>
@@ -83,7 +83,7 @@ export default function NewProject() {
                                             type="text"
                                             maxLength="100"
                                         />
-                                        <Form.Label for="subreddit">Subreddit:</Form.Label>
+                                        <Form.Label>Subreddit:</Form.Label>
                                         <Form.Control
                                             value={keyword.subreddit}
                                             onChange={(e) =>
@@ -97,7 +97,7 @@ export default function NewProject() {
                                 );
                             })}
                             <Container className="buttons">
-                                <Button variant="warning" onClick={addNewKeywords}>
+                                <Button variant="warning mx-1" onClick={addNewKeywords}>
                                     +
                                 </Button>
                                 <Button variant="primary" type="submit">
@@ -108,9 +108,7 @@ export default function NewProject() {
                     </Form>
                 </Card.Body>
             </Card>
-
-        
-        </div>
+        </Container>
     );
 
 }
