@@ -12,7 +12,7 @@ const Graph = (props) => {
         // console.log("raw data: ", data);
         setProjects(data);
       });
-  }, [props.data]);
+  }, []);
   const datasets = projects.map((keyword) => {
     let random_rgba = () => {
       var o = Math.round,

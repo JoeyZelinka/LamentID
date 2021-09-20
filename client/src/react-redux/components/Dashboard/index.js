@@ -4,6 +4,10 @@ import Graph from "../Graph";
 
 function Dashboard() {
   const [projects, setProjects] = useState([]);
+  const [date, setDate] = useState({
+    start_seconds_utc: 0,
+    end_seconds_utc: 0
+  })
 
   useEffect(() => {
     fetch("/api/v1/projects/")
@@ -23,12 +27,16 @@ function Dashboard() {
         {projects.map((project) => {
           return (
             <Tab eventKey={project.id} title={project.name}>
-              <Container className="d-flex justify-content-end">
+              <Container className="d-flex">
                 <Button type="button" key={project.id}>
                   Add More Keywords
                 </Button>
               </Container>
-              <Graph data={project.id} key={project.id} />
+              <Graph date={date} data={project.id} key={project.id} />
+                <br/>
+              <Container className="d-flex">
+                <Button>Set Date</Button>
+              </Container>
             </Tab>
           );
         })}
