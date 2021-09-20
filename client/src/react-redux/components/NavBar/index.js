@@ -8,7 +8,11 @@ import Dashboard from '../Dashboard'
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLoggedOut } from '../User/actions'
+
+import HomePage from '../HomePage/index'
+
 import ProtectedRoute from '../ProtectedRoute/index';
+
 
 
 function NavBar() {
@@ -46,7 +50,7 @@ function NavBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
-                <Nav.Link as={Link} to="/">Home</Nav.Link>
+                <Nav.Link as={Link} to="/homepage">Home</Nav.Link>
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 {checked && user ? (
                   <>
@@ -93,6 +97,9 @@ function NavBar() {
         </Navbar>
         <div className="App">
           <Switch>
+          <Route path="/homepage">
+              <HomePage />
+            </Route>
             <Route path="/register">
               <Register />
             </Route>
