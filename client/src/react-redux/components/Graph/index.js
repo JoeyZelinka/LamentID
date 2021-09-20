@@ -4,22 +4,29 @@ import "chartjs-adapter-date-fns";
 import { enUS } from "date-fns/locale";
 
 const Graph = (props) => {
-  const [rawData, setRawData] = useState([]);
+  const [projects, setProjects] = useState([]);
   useEffect(() => {
-    fetch("/api/v1/projects/1/comments")
+    fetch(`/api/v1/projects/${props.data}/comments`)
       .then((res) => res.json())
       .then((data) => {
-        setRawData(data);
+        // console.log("raw data: ", data);
+        setProjects(data);
       });
-  }, []);
-  const datasets = rawData.map((keyword) => {
+  }, [props.data]);
+  const datasets = projects.map((keyword) => {
     let random_rgba = () => {
-      var o = Math.round, r = Math.random, s = 255;
-      return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ', 0.9)';
-  }
+      var o = Math.round,
+        r = Math.random,
+        s = 255;
+      return (
+        "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ", 0.9)"
+      );
+    };
     return {
       label: keyword.searchTerm,
       borderColor: random_rgba(),
+      cubicInterpolationMode: "monotone",
+      tension: 0.5,
       data: keyword.Comments.map((comment) => {
         const commentData = JSON.parse(comment.data);
         const sentimentData = JSON.parse(comment.sentiment);
@@ -27,19 +34,17 @@ const Graph = (props) => {
           x: commentData.created_utc * 1000,
           y: sentimentData.score,
         };
-      })
-      .sort((a, b) => a.x > b.x ? -1 : 1),
+      }).sort((a, b) => (a.x > b.x ? -1 : 1)),
     };
   });
-  console.log(datasets)
   if (datasets.length === 0) {
-    return ''
+    return "";
   }
   return (
     <div>
       <Line
         data={{
-          datasets
+          datasets,
         }}
         height={400}
         width={600}
@@ -51,14 +56,14 @@ const Graph = (props) => {
             },
           },
           ticks: {
-            source: 'auto'
+            source: "auto",
           },
           scales: {
             x: {
               type: "time",
               time: {
                 unit: "minute",
-              }
+              },
             },
           },
         }}
@@ -66,4 +71,5 @@ const Graph = (props) => {
     </div>
   );
 };
+
 export default Graph;

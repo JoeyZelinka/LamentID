@@ -8,7 +8,11 @@ import Dashboard from '../Dashboard'
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionLoggedOut } from '../User/actions'
+
 import HomePage from '../HomePage/index'
+
+import ProtectedRoute from '../ProtectedRoute/index';
+
 
 
 function NavBar() {
@@ -24,7 +28,7 @@ function NavBar() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
   //modal variables end
- 
+
 
 
 
@@ -42,7 +46,7 @@ function NavBar() {
       <Router>
         <Navbar bg="light" expand="lg" className="mb-3">
           <Container>
-            <img src="/lamentidv2crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" />
+            <img src="/lamentidv3crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" />
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
@@ -57,44 +61,36 @@ function NavBar() {
                 ) : (
                   // <Nav.Link as={Link} to="/login">Login</Nav.Link>
                   <Container>
-                  
                     <Button variant="link" onClick={handleShow}>
                       Login
                     </Button>
-
                     <Modal show={show} onHide={handleClose}>
-                      
-                        <Modal.Title>Enter Login Info</Modal.Title>
-                     
-                      <Modal.Body><Login/></Modal.Body>
+                      <Modal.Title>Enter Login Info</Modal.Title>
+                      <Modal.Body><Login /></Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                           Close
                         </Button>
-                        
                       </Modal.Footer>
-                    </Modal>               
-                                  
-                  <Button variant="link" onClick={handleShow2}>
-                    Register
+                    </Modal>
+                    <Button variant="link" onClick={handleShow2}>
+                      Register
                     </Button>
-                  <Modal show={show2} onHide={handleClose2}>
-                    
+                    <Modal show={show2} onHide={handleClose2}>
                       <Modal.Title>Enter Registration Info</Modal.Title>
-                   
-                    <Modal.Body><Register/></Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose2}>
-                        Close
-                      </Button>
-                      
-                    </Modal.Footer>
-                  </Modal>
-                  </Container>
-                  )}
-                  
+                      <Modal.Body><Register /></Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose2}>
+                          Close
+                        </Button>
 
-                
+                      </Modal.Footer>
+                    </Modal>
+                  </Container>
+                )}
+
+
+
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -113,12 +109,12 @@ function NavBar() {
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/newprojects">
+            <ProtectedRoute path="/newprojects">
               <NewProjects />
-            </Route>
-            <Route path="/dashboard">
+            </ProtectedRoute>
+            <ProtectedRoute path="/dashboard">
               <Dashboard />
-            </Route>
+            </ProtectedRoute>
           </Switch>
         </div>
       </Router>

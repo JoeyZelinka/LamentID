@@ -38,7 +38,7 @@ router.post('/new', async (req, res) =>{
 //Get Projects
 router.get('/', async (req, res) => {
   const user = await db.User.findByPk(req.session.user.id)
-  //find one project
+  //find all projects
   const projects = await db.Project.findAll({
     where: {
       UserId: user.id
@@ -50,7 +50,7 @@ router.get('/', async (req, res) => {
 
 
 
-//Get Projects
+//Get Project
 router.get("/:project_id", async (req, res) => {
   // const user = await db.User.findByPk(req.session.user.id)
   //find one project
@@ -69,6 +69,36 @@ router.get("/:project_id/keywords", async (req, res) => {
   });
   //send back
   res.send(keywords);
+});
+
+
+router.post("/:project_id/keywords", async (req, res) => {
+  // check for content
+  if (!req.body || !req.body.keywords ) {
+    res.status(400).json({
+      error: 'Please include all required fields.'
+    })
+    return
+  }
+  //create project where project id matches
+  const project = await db.Project.findByPk(req.params.project_id)
+  if (project.UserId !== req.session.user.id) {
+    res.status(400).json({
+      error: 'Can not edit projects that are not attributed to your account.'
+    })
+  }
+      //add searchTerm and subreddit
+      if( req.body.keywords ) {
+        req.body.keywords.forEach(async keyword => {
+          await project.createKeyword({
+            searchTerm: keyword.searchTerm,
+            subreddit: keyword.subreddit
+          })
+        });
+      }
+
+  //send back
+  res.send(project);
 });
 
 router.get("/:project_id/comments", async (req, res) => {
