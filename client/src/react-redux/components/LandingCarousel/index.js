@@ -16,7 +16,10 @@ export default function LandingCarousel() {
             x: 0,
             y: 0,
             transition: {
-                duration: 5,
+
+
+                duration: 3,
+
                 staggerChildren: 0.5
             }
         }
