@@ -16,7 +16,7 @@ export default function LandingCarousel() {
             x: 0,
             y: 0,
             transition: {
-                duration: 5,
+                duration: 8,
                 staggerChildren: 0.5
             }
         }
@@ -38,10 +38,10 @@ export default function LandingCarousel() {
                     <Col><Card.Text>Product</Card.Text><motion.img variants={variants} src="/af1.jpg" alt=""></motion.img></Col>
                     <Col><Card.Text>Future Purchase</Card.Text><motion.img variants={variants} src="/corvette.jpg" alt=""></motion.img></Col>
                 </Row>
-                <Row className="software">
-                    <Card.Text>With our sentiment tracking software:</Card.Text>
-                    <motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img>
-                </Row>
+                <Col className="software">
+                    <Row><Card.Text>With our sentiment tracking software:</Card.Text></Row>
+                    <Row><Col><motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img></Col></Row>
+                </Col>
 
             </motion.div>
         </Container>
