@@ -101,7 +101,7 @@ export default function NewProject() {
                 </Card.Body>
             </Card>
 
-        </Container>
+        </div>
 
     )
 }

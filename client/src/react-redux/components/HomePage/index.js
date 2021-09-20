@@ -1,17 +1,16 @@
-import "./index.css";
-import NavBar from '../NavBar/index'
 import LandingCarousel from '../LandingCarousel/index'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Graph from "../Graph/index"
 
-function App() {
+function HomePage() {
   return (
     <div>
-      <NavBar/>
       
+      <LandingCarousel/>
+      <Graph/>
 
       </div>
   );
 }
 
-export default App;
+export default HomePage;
