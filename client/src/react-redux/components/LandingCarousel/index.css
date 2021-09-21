@@ -1,26 +1,36 @@
 .trackyour {
     display: flex;
-    font-family: cursive;
-    font-size: 50px;
     background-color: rgb(197, 193, 193);
-    padding-bottom: 20px;
-    margin-top: 30px;
-    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    justify-content: center;
 }
 
 .bpf {
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
     font-size: 20px;
-    padding-top: 30px;
+    padding-top: 10px;
+    text-align: center;
 
 }
 
 .software {
     display: flex;
     padding-top: 120px;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
-   justify-content: center;
-    
-    
+    text-align: center;
+}
+
+.homepage {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardText {
+    font-family: ;
+}
+
+.bigdivstyle {
+    display: flex;
+    flex-direction: column;
 }
