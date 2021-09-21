@@ -11,6 +11,9 @@ function Dashboard() {
     end_date: -1,
     filter_sentiment: false
   });
+  const [start, setStart ] = useState(-1)
+  const [end, setEnd ] = useState(-1)
+  const [filterSentiment, setFilterSentiment ] = useState(false)
   //modal variables start
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -23,18 +26,14 @@ function Dashboard() {
       .then((data) => {
         setProjects(data);
       })
-    // .then(() => {
-    //   projects.forEach(project => {
-    //     fetch(`/api/v1/projects/${project.id}/comments`)
-    //       .then(res => res.json())
-    //       .then(data => {
-    //         setComments(data)
-    //       })
-    //   });
-    // })
   }, []);
-  const handleSubmit = () => {
-
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setControl({
+      start_date: start/1000,
+      end_date: end/1000,
+      filter_sentiment: filterSentiment
+    })
   }
 
   return (
@@ -48,7 +47,7 @@ function Dashboard() {
           return (
             <Tab eventKey={project.id} title={project.name}>
               <br />
-              <Graph date={control} data={project.id} key={project.id} />
+              <Graph control={control} data={project.id} key={project.id} />
               <br/>
               <Container className="d-flex">
                 <Button
@@ -67,8 +66,8 @@ function Dashboard() {
                 </Modal>
               </Container>
               <br/>
-              <Container>
-                <Form>
+              {/* <Container>
+                <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Control type="text" placeholder="" />
                     <Form.Text className="text-muted">
@@ -76,7 +75,8 @@ function Dashboard() {
                     </Form.Text>
                   </Form.Group>
 
-                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                  <Form.Group className="mb-3" controlId="formBasicCheckbox"
+                  onChange={(e) => setStart(e.target.value)}>
                     <Form.Control as="select">
                       <option value="minutes">Minutes</option>
                       <option value="hours">Hours</option>
@@ -86,13 +86,14 @@ function Dashboard() {
                     <Form.Check
                       type="checkbox"
                       label="Filter Neutral Sentiment"
+                      onChange={(e) => setFilterSentiment(e.target.value)} 
                     />
                   </Form.Group>
                   <Button variant="secondary" type="submit">
                     Update Graph
                   </Button>
                 </Form>
-              </Container>
+              </Container> */}
             </Tab>
           );
         })}

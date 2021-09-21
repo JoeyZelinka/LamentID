@@ -29,11 +29,12 @@ async function getKeywords() {
 }
 
 async function getSubreddits() {
-  const subreddits = await db.Keyword.findAll({
+  const subreddits = (await db.Keyword.findAll({
     group: "subreddit",
     attributes: ["subreddit"],
-  }).map((x) => x.subreddit)
+  })).map((x) => x.subreddit)
   debug("monitoring subreddits: %s", subreddits)
+  return subreddits
 }
 
 function getCommentStream(subreddits) {
