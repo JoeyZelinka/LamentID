@@ -16,7 +16,7 @@
 
 .software {
     display: flex;
-    padding-top: 120px;
+    padding-top: 90px;
     font-size: 20px;
     text-align: center;
 }
@@ -26,11 +26,12 @@
     flex-direction: column;
 }
 
-.cardText {
-    font-family: ;
-}
 
 .bigdivstyle {
     display: flex;
     flex-direction: column;
+}
+
+.graph {
+    width: 75vw
 }

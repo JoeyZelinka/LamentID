@@ -49,7 +49,7 @@ export default function LandingCarousel() {
                 </Row>
                 <Row className="software">
                     <Card.Text>With our sentiment tracking software:</Card.Text>
-                    <motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img>
+                    <motion.img variants={variants} src="/homepageGraph.png" alt="" className="graph"></motion.img>
                 </Row>
 
             </motion.div>

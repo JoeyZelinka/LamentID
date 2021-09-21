@@ -13,9 +13,27 @@ import ProtectedRoute from "../ProtectedRoute/index"
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { actionLoggedIn, actionLoggedOut } from "../User/actions";
 
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('/api/v1/users/current')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.error) {
+          dispatch(actionLoggedIn(data))
+        } else {
+          dispatch(actionLoggedOut())
+        }
+      })
+  }, [dispatch])
+
+
   return (
     <div>
       <Router>
