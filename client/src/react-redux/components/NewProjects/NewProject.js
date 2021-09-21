@@ -57,6 +57,14 @@ export default function NewProject() {
 
     return (
         <Container className="newProjectForm">
+            <div className="information">
+                <h1 className="display-6">
+                    Start a New Project
+                </h1>
+                <p>
+                    Please include a name for your project, the words you would like to search for, and the names of the subreddits you'd like to search in.
+                </p>
+            </div>
             {error && <div>{error}</div>}
             <Card>
                 <Card.Body>

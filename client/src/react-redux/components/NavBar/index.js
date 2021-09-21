@@ -49,8 +49,8 @@ function NavBar() {
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 {checked && user ? (
                   <>
-                    <Nav.Link as={Link} to="/newprojects">Start New Project</Nav.Link>
                     <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                    <Nav.Link as={Link} to="/newprojects">Start New Project</Nav.Link>
                     <Nav.Link href="/logout" onClick={handleLogout}>Logout</Nav.Link>
                   </>
                 ) : (

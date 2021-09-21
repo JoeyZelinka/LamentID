@@ -1,8 +1,13 @@
 .newProjectForm {
-    display:flex
+    display:flex;
+    flex-direction: column;
 }
 
 .buttons {
     margin-top: 10px;
-    
+}
+
+.information {
+    margin-left: 20px;
+    margin-top: 10px;
 }
