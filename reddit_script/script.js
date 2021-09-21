@@ -96,7 +96,7 @@ async function scan() {
           // console.log(keywords[0]);
           comment.addKeywords(keywordsFound);
           commentCount++;
-          if (commentCount > 1000) {
+          if (commentCount > 100) {
             commentCount = 0
             keywords = await getKeywords();
             subreddits = await getSubreddits();
