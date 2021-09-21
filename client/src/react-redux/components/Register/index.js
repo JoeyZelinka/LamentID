@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
-import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+import { Redirect, useHistory } from "react-router";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -61,9 +60,6 @@ export default function Register() {
             </Button>
           </Form>
         </Card.Body>
-        <Card.Footer>
-          Already have an account? <Link to="/login">Login Here</Link>
-        </Card.Footer>
       </Card>
     </Container>
   );
