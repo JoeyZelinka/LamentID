@@ -4,40 +4,19 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("Keywords", [
       {
-        searchTerm: "I",
-        subreddit: "AskReddit",
+        searchTerm: "and",
+        subreddit: "baseball",
         ProjectId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        searchTerm: "we",
-        subreddit: "AskReddit",
+        searchTerm: "node",
+        subreddit: "javascript",
         ProjectId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
-      },
-      {
-        searchTerm: "me",
-        subreddit: "AskReddit",
-        ProjectId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        searchTerm: "you",
-        subreddit: "AskReddit",
-        ProjectId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        searchTerm: "us",
-        subreddit: "AskReddit",
-        ProjectId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      }
     ]);
   },
 

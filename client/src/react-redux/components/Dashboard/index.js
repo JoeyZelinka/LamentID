@@ -22,7 +22,7 @@ function Dashboard() {
       .then((res) => res.json())
       .then((data) => {
         setProjects(data);
-      });
+      })
     // .then(() => {
     //   projects.forEach(project => {
     //     fetch(`/api/v1/projects/${project.id}/comments`)

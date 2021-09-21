@@ -35,6 +35,17 @@ async function getSubreddits() {
   return subreddits.map((x) => x.subreddit);
 }
 
+function getCommentStream(subreddits) {
+  debug(subreddits)
+  debug(subreddits.join("+"))
+  return new CommentStream(client, {
+    subreddit: subreddits.join("+"),
+    // subreddit: "baseball+javascript",
+    limit: 200,
+    pollTime: 2000,
+  });
+}
+
 async function scan() {
   let commentCount = 0;
   let keywords = await getKeywords();
@@ -43,11 +54,7 @@ async function scan() {
   // get all keywords to scan
 
   // console.log(subreddits)
-  const commentStream = new CommentStream(client, {
-    subreddit: subreddits.join("+"),
-    limit: 10,
-    pollTime: 2000,
-  });
+  const commentStream = getCommentStream(subreddits)
 
   commentStream.on("item", (comment) => {
     // scan comment for sentiment
@@ -87,11 +94,13 @@ async function scan() {
           // console.log(keywords[0]);
           comment.addKeywords(keywordsFound);
           commentCount++;
-          if (commentCount > 15) {
+          if (commentCount > 1000) {
             commentCount = 0
             keywords = await getKeywords();
             subreddits = await getSubreddits();
             debug("getting new keywords: ", keywords)
+            commentStream.end()
+            commentStream = getCommentStream(subreddits)
           }
         })
         .catch((err) => {
