@@ -11,8 +11,8 @@ const Graph = (props) => {
       .then((data) => {
         // console.log("raw data: ", data);
         setProjects(data);
-      });
-  }, [props.data]);
+      })
+  }, []);
   const datasets = projects.map((keyword) => {
     let random_rgba = () => {
       var o = Math.round,
@@ -28,13 +28,27 @@ const Graph = (props) => {
       cubicInterpolationMode: "monotone",
       tension: 0.5,
       data: keyword.Comments.map((comment) => {
+
         const commentData = JSON.parse(comment.data);
         const sentimentData = JSON.parse(comment.sentiment);
         return {
           x: commentData.created_utc * 1000,
           y: sentimentData.score,
         };
-      }).sort((a, b) => (a.x > b.x ? -1 : 1)),
+      })
+      // .filter(comment => {
+      //   // filter neutral sentiments
+      //   return props.control.filter_sentiment && comment.y !== 0
+      // })
+      // .filter(comment => {
+      //   // filter start date
+      //   return props.control.start_date > comment.x
+      // })
+      // .filter(comment => {
+      //   // filter end date
+      //   return props.control.end_date < comment.x
+      // })
+      .sort((a, b) => (a.x > b.x ? -1 : 1)),
     };
   });
   if (datasets.length === 0) {
