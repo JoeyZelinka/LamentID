@@ -5,13 +5,20 @@ import { enUS } from "date-fns/locale";
 
 const Graph = (props) => {
   const [projects, setProjects] = useState([]);
+  const [control, setControl ] = useState({
+    start_date: -1,
+    end_date: -1,
+    filter_sentiment: false
+  })
   useEffect(() => {
     fetch(`/api/v1/projects/${props.data}/comments`)
       .then((res) => res.json())
       .then((data) => {
         // console.log("raw data: ", data);
         setProjects(data);
-      });
+      }).then(() => {
+        setControl(props.control)
+      })
   }, []);
   const datasets = projects.map((keyword) => {
     let random_rgba = () => {
