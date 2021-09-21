@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Container, Row, Col } from 'react-bootstrap'
 import "./index.css"
 import { motion } from 'framer-motion'
+import Typewriter from 'typewriter-effect'
 
 
 export default function LandingCarousel() {
@@ -25,25 +26,30 @@ export default function LandingCarousel() {
         }
     }
     return (
-        <Container>
+        <Container className="homepage">
+                <div className="trackyour">
+                    <h1 className="display-5 track"><Typewriter options={{
+                        strings: ['Track Your:'],
+                        autoStart: true,
+                        pauseFor: 50000
+                        }} />
+                    </h1>
+                </div>
+
+
             <motion.div
                 variants={variants}
                 initial="hidden"
                 animate="show"
                 className="bigdivstyle">
-                <Card className="trackyour w-25">
-                    <Card.Body>Track Your:</Card.Body>
-                </Card>
-
-
                 <Row className="bpf">
-                    <Col><Card.Text>Brand</Card.Text><motion.img variants={variants} src="/swoosh.png" alt=""></motion.img></Col>
+                    <Col><Card.Text className="cardText">Brand</Card.Text><motion.img variants={variants} src="/swoosh.png" alt=""></motion.img></Col>
                     <Col><Card.Text>Product</Card.Text><motion.img variants={variants} src="/af1.jpg" alt=""></motion.img></Col>
                     <Col><Card.Text>Future Purchase</Card.Text><motion.img variants={variants} src="/corvette.jpg" alt=""></motion.img></Col>
                 </Row>
                 <Row className="software">
-                    <Col><Card.Text>With our sentiment tracking software:</Card.Text></Col>
-                    <Col><motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img></Col>
+                    <Card.Text>With our sentiment tracking software:</Card.Text>
+                    <motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img>
                 </Row>
 
             </motion.div>
