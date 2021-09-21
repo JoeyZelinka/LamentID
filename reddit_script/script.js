@@ -24,6 +24,7 @@ const client = new Snoowrap(creds);
 async function getKeywords() {
   // get keywords from db
   const keywords = await db.Keyword.findAll();
+  debug("monitoring keywords: %s", keywords.map(x => x.searchTerm))
   return keywords;
 }
 
@@ -31,13 +32,13 @@ async function getSubreddits() {
   const subreddits = await db.Keyword.findAll({
     group: "subreddit",
     attributes: ["subreddit"],
-  });
-  return subreddits.map((x) => x.subreddit);
+  }).map((x) => x.subreddit)
+  debug("monitoring subreddits: %s", subreddits)
 }
 
 function getCommentStream(subreddits) {
-  debug(subreddits)
-  debug(subreddits.join("+"))
+  // debug(subreddits)
+  // debug(subreddits.join("+"))
   return new CommentStream(client, {
     subreddit: subreddits.join("+"),
     // subreddit: "baseball+javascript",
@@ -90,7 +91,7 @@ async function scan() {
         redditId: comment.id,
       })
         .then( async (comment) => {
-          debug("comment id: ", commentContainer.data.id);
+          // debug("comment id: ", commentContainer.data.id);
           // console.log(keywords[0]);
           comment.addKeywords(keywordsFound);
           commentCount++;
