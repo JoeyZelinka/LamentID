@@ -64,9 +64,6 @@ export default function Login() {
             </Button>
           </Form>
         </Card.Body>
-        <Card.Footer>
-          Don't have an account? <Link to="/register">Register Here</Link>
-        </Card.Footer>
       </Card>
     </Container>
   );

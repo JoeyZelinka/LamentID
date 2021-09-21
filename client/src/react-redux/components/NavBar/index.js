@@ -46,7 +46,7 @@ function NavBar() {
       <Router>
         <Navbar bg="light" expand="lg" className="mb-3">
           <Container>
-            <a href="/"><img src="/lamentidv3crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" /></a>
+            <a href="/homepage"><img src="/lamentidv3crop.png" height="50" className="d-inline-block align-top" alt="Lament.ID Logo" /></a>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="ms-auto">
@@ -65,7 +65,7 @@ function NavBar() {
                       Login
                     </Button>
                     <Modal show={show} onHide={handleClose}>
-                      <Modal.Title>Enter Login Info</Modal.Title>
+                      <Modal.Title className="m-3">Enter Login Info</Modal.Title>
                       <Modal.Body><Login /></Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
@@ -77,13 +77,12 @@ function NavBar() {
                       Register
                     </Button>
                     <Modal show={show2} onHide={handleClose2}>
-                      <Modal.Title>Enter Registration Info</Modal.Title>
+                      <Modal.Title className="m-3">Enter Registration Info</Modal.Title>
                       <Modal.Body><Register /></Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose2}>
                           Close
                         </Button>
-
                       </Modal.Footer>
                     </Modal>
                   </Container>
