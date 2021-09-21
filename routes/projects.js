@@ -1,10 +1,11 @@
 var express = require('express');
+const checkAuth = require('../checkAuth');
 const db = require('../models');
 var router = express.Router();
 
 
 // Create New Project
-router.post('/new', async (req, res) =>{
+router.post('/new', checkAuth, async (req, res) =>{
   // check for content
   if (!req.body || !req.body.name || !req.body.keywords ) {
     res.status(400).json({
@@ -36,7 +37,7 @@ router.post('/new', async (req, res) =>{
 
 
 //Get Projects
-router.get('/', async (req, res) => {
+router.get('/', checkAuth, async (req, res) => {
   const user = await db.User.findByPk(req.session.user.id)
   //find all projects
   const projects = await db.Project.findAll({
@@ -51,7 +52,7 @@ router.get('/', async (req, res) => {
 
 
 //Get Project
-router.get("/:project_id", async (req, res) => {
+router.get("/:project_id", checkAuth, async (req, res) => {
   // const user = await db.User.findByPk(req.session.user.id)
   //find one project
   const project = await db.Project.findByPk(req.params.project_id);
@@ -72,7 +73,7 @@ router.get("/:project_id/keywords", async (req, res) => {
 });
 
 
-router.post("/:project_id/keywords", async (req, res) => {
+router.post("/:project_id/keywords", checkAuth, async (req, res) => {
   // check for content
   if (!req.body || !req.body.keywords ) {
     res.status(400).json({
@@ -101,7 +102,7 @@ router.post("/:project_id/keywords", async (req, res) => {
   res.send(project);
 });
 
-router.get("/:project_id/comments", async (req, res) => {
+router.get("/:project_id/comments", checkAuth, async (req, res) => {
   // const user = await db.User.findByPk(req.session.user.id)
   //find one project
   const keywords = await db.Keyword.findAll({

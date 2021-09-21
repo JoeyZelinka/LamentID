@@ -48,8 +48,8 @@ export default function LandingCarousel() {
                     <Col><Card.Text>Future Purchase</Card.Text><motion.img variants={variants} src="/corvette.jpg" alt=""></motion.img></Col>
                 </Row>
                 <Row className="software">
-                    <Col><Card.Text>With our sentiment tracking software:</Card.Text>
-                    <motion.img variants={variants} src="/dummygraph.png" alt=""></motion.img></Col>
+                    <Card.Text>With our sentiment tracking software:</Card.Text>
+                    <motion.img variants={variants} src="/homepageGraph.png" alt="" className="graph"></motion.img>
                 </Row>
 
             </motion.div>

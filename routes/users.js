@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const db = require("../models");
 const bcrypt = require("bcrypt");
+const checkAuth = require('../checkAuth');
 
 // Register New User
 router.post("/register", function (req, res, next) {
@@ -87,5 +88,16 @@ router.get("/logout", (req, res) => {
     success: "User logged out.",
   });
 });
+
+// current
+router.get('/current', checkAuth, async (req, res) => {
+  const user = await db.User.findByPk(req.session.user.id)
+
+  // extract password from user, assign all other to a new userData variable
+  const { password, ...userData } = user.dataValues;
+
+  // respond with success/error
+  res.json(userData) // sending back userData which does not include password)
+})
 
 module.exports = router;
