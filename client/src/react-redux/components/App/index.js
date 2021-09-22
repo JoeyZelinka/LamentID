@@ -1,6 +1,6 @@
 import "./index.css";
 import NavBar from '../NavBar/index'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from "../HomePage/index"
 import Register from '../Register/index'
 import Login from '../Login/index'
