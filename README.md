@@ -1,7 +1,5 @@
 # LamentID
 
-* **Live link:**
-https://lamentid.com
 <br /><br />
 <img src="client/public/homepage.png">
 <br />
