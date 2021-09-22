@@ -10,21 +10,18 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      // password = test
       name: "r/coronavirus",
       UserId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      // password = test
       name: "r/politics",
       UserId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
-      // password = test
       name: "r/conservative",
       UserId: 1,
       createdAt: new Date(),

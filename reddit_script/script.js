@@ -66,8 +66,8 @@ async function scan() {
     sentimentResult.tokens.forEach((word) => {
       keywords.forEach((keyword) => {
         if (
-          word == keyword.searchTerm &&
-          comment.subreddit.display_name == keyword.subreddit
+          word.toLowerCase() == keyword.searchTerm.toLowerCase() &&
+          comment.subreddit.display_name.toLowerCase() == keyword.subreddit.toLowerCase()
         ) {
           keywordsFound.push(keyword);
         }
