@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
+import {  Link } from 'react-router-dom'
 import Register from '../Register/index'
 import Login from '../Login/index'
 import { Container, Nav, Navbar, Button, Modal } from 'react-bootstrap'

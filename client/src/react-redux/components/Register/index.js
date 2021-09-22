@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -22,12 +22,11 @@ export default function Register() {
       }),
     })
     .then((res) => res.json())
-    // todo log user in after registering
     .then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
-        history.push("/");
+        history.push("/login");
         }
       });
   };

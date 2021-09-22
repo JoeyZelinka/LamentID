@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Tab, Tabs, Button, Container, Modal, Form } from "react-bootstrap";
+import { Tab, Tabs, Button, Container, Modal } from "react-bootstrap";
 import AddKeywords from "../AddKeywords";
 import Graph from "../Graph";
 
 function Dashboard() {
   const [projects, setProjects] = useState([]);
   // const [ comments, setComments ] = useState([])
-  const [control, setControl] = useState({
-    start_date: -1,
-    end_date: -1,
-    filter_sentiment: false
-  });
-  const [start, setStart ] = useState(-1)
-  const [end, setEnd ] = useState(-1)
-  const [filterSentiment, setFilterSentiment ] = useState(false)
+  // const [control, setControl] = useState({
+  //   start_date: -1,
+  //   end_date: -1,
+  //   filter_sentiment: false
+  // });
+  // const [start, setStart ] = useState(-1)
+  // const [end, setEnd ] = useState(-1)
+  // const [filterSentiment, setFilterSentiment ] = useState(false)
   //modal variables start
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,14 +27,14 @@ function Dashboard() {
         setProjects(data);
       })
   }, []);
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setControl({
-      start_date: start/1000,
-      end_date: end/1000,
-      filter_sentiment: filterSentiment
-    })
-  }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
+  //   setControl({
+  //     start_date: start/1000,
+  //     end_date: end/1000,
+  //     filter_sentiment: filterSentiment
+  //   })
+  // }
 
   return (
     <Container>
@@ -47,7 +47,10 @@ function Dashboard() {
           return (
             <Tab eventKey={project.id} title={project.name}>
               <br />
-              <Graph control={control} data={project.id} key={project.id} />
+              <Graph 
+                // control={control} 
+                data={project.id}
+                key={project.id} />
               <br/>
               <Container className="d-flex">
                 <Button

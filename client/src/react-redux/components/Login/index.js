@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Alert, Button, Card, Container, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionLoggedIn } from "../User/actions";
 
@@ -31,7 +30,7 @@ export default function Login() {
         } else {
           console.log(data)
           dispatch(actionLoggedIn(data.user));
-          history.push("/");
+          history.push("/dashboard");
         }
       });
   };
