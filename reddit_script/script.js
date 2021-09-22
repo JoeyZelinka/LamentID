@@ -66,8 +66,8 @@ async function scan() {
     sentimentResult.tokens.forEach((word) => {
       keywords.forEach((keyword) => {
         if (
-          word == keyword.searchTerm &&
-          comment.subreddit.display_name == keyword.subreddit
+          word.toLowerCase() == keyword.searchTerm.toLowerCase() &&
+          comment.subreddit.display_name.toLowerCase() == keyword.subreddit.toLowerCase()
         ) {
           keywordsFound.push(keyword);
         }
@@ -96,7 +96,7 @@ async function scan() {
           // console.log(keywords[0]);
           comment.addKeywords(keywordsFound);
           commentCount++;
-          if (commentCount > 1000) {
+          if (commentCount > 100) {
             commentCount = 0
             keywords = await getKeywords();
             subreddits = await getSubreddits();
