@@ -14,7 +14,7 @@ store.sync();
 // one
 const projectRouter = require('./routes/project');
 // many
-const indexRouter = require('./routes/index');
+
 const usersRouter = require('./routes/users');
 const projectsRouter = require('./routes/projects');
 
@@ -42,9 +42,12 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // one
 app.use('/api/v1/project', projectRouter);
 // many
-app.use('/', indexRouter);
+
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/projects', projectsRouter);
+app.get('*', (req,res)=> {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'))
+})
 
 // run script
 if(process.env.ENABLE_SCAN){
